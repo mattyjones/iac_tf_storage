@@ -7,7 +7,7 @@
 # Usage: Backup                           #
 # Class: Glacier                          #
 # Versioned: false                        #
-# Lifecycle: 0 Days -> Glacier            #
+# Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
 resource "aws_s3_bucket" "ceng-adult" {
   bucket = "ceng-adult"
@@ -18,27 +18,27 @@ resource "aws_s3_bucket" "ceng-adult" {
   }
 
   lifecycle_rule {
-    id      = "adult"
+    id      = "adult-glacier"
     prefix  = ""
     enabled = true
 
     transition {
-      days          = 0
+      days          = 1
       storage_class = "GLACIER"
     }
   }
+}
 
-  resource "aws_s3_bucket_object" "videos" {
-    bucket = "ceng-adult"
-    key    = "videos/"
-    source = "objects/videos"
-  }
+resource "aws_s3_bucket_object" "videos" {
+  bucket = "${aws_s3_bucket.ceng-adult.bucket}"
+  key    = "videos/"
+  source = "objects/videos"
+}
 
-  resource "aws_s3_bucket_object" "pictures" {
-    bucket = "ceng-adult"
-    key    = "pictures/"
-    source = "objects/pictures"
-  }
+resource "aws_s3_bucket_object" "pictures" {
+  bucket = "${aws_s3_bucket.ceng-adult.bucket}"
+  key    = "pictures/"
+  source = "objects/pictures"
 }
 
 #-----------------------------------------#
@@ -46,7 +46,7 @@ resource "aws_s3_bucket" "ceng-adult" {
 # Usage: Backup                           #
 # Class: Glacier                          #
 # Versioned: false                        #
-# Lifecycle: 0 Days -> Glacier            #
+# Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
 resource "aws_s3_bucket" "ceng-applications" {
   bucket = "ceng-applications"
@@ -62,38 +62,38 @@ resource "aws_s3_bucket" "ceng-applications" {
     enabled = true
 
     transition {
-      days          = 0
+      days          = 1
       storage_class = "GLACIER"
     }
   }
+}
 
-  ## Linux ##
-  resource "aws_s3_bucket_object" "linux" {
-    bucket = "ceng-applications"
-    key    = "linux/"
-    source = "objects/linux"
-  }
+## Linux ##
+resource "aws_s3_bucket_object" "linux" {
+  bucket = "${aws_s3_bucket.ceng-applications.bucket}"
+  key    = "linux/"
+  source = "objects/linux"
+}
 
-  ## OSX ##
-  resource "aws_s3_bucket_object" "osx" {
-    bucket = "ceng-applications"
-    key    = "osx/"
-    source = "objects/osx"
-  }
+## OSX ##
+resource "aws_s3_bucket_object" "osx" {
+  bucket = "${aws_s3_bucket.ceng-applications.bucket}"
+  key    = "osx/"
+  source = "objects/osx"
+}
 
-  ## Other ##
-  resource "aws_s3_bucket_object" "other" {
-    bucket = "ceng-applications"
-    key    = "other/"
-    source = "objects/other"
-  }
+## Other ##
+resource "aws_s3_bucket_object" "other" {
+  bucket = "${aws_s3_bucket.ceng-applications.bucket}"
+  key    = "other/"
+  source = "objects/other"
+}
 
-  ## Win7 ##
-  resource "aws_s3_bucket_object" "win7" {
-    bucket = "ceng-applications"
-    key    = "win7/"
-    source = "objects/win7"
-  }
+## Win7 ##
+resource "aws_s3_bucket_object" "win7" {
+  bucket = "${aws_s3_bucket.ceng-applications.bucket}"
+  key    = "win7/"
+  source = "objects/win7"
 }
 
 #-----------------------------------------#
@@ -101,7 +101,7 @@ resource "aws_s3_bucket" "ceng-applications" {
 # Usage: Backup                           #
 # Class: Glacier                          #
 # Versioned: false                        #
-# Lifecycle: 0 Days -> Glacier            #
+# Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
 resource "aws_s3_bucket" "ceng-books" {
   bucket = "ceng-books"
@@ -117,7 +117,7 @@ resource "aws_s3_bucket" "ceng-books" {
     enabled = true
 
     transition {
-      days          = 0
+      days          = 1
       storage_class = "GLACIER"
     }
   }
@@ -129,7 +129,7 @@ resource "aws_s3_bucket" "ceng-books" {
 # Class: Infrequent Access                #
 # Class: Glacier                          #
 # Versioned: false                        #
-# Lifecycle: 0 Days -> Infrequent Access  #
+# Lifecycle: 1 Day -> Infrequent Access   #
 # Lifecycle: 30 Days -> Glacier           #
 #-----------------------------------------#
 resource "aws_s3_bucket" "ceng-documents" {
@@ -146,11 +146,6 @@ resource "aws_s3_bucket" "ceng-documents" {
     enabled = true
 
     transition {
-      days          = 0
-      storage_class = "STANDARD_IA"
-    }
-
-    transition {
       days          = 30
       storage_class = "GLACIER"
     }
@@ -162,7 +157,7 @@ resource "aws_s3_bucket" "ceng-documents" {
 # Usage: Backup                           #
 # Class: Glacier                          #
 # Versioned: false                        #
-# Lifecycle: 0 Days -> Glacier            #
+# Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
 resource "aws_s3_bucket" "ceng-media" {
   bucket = "ceng-media"
@@ -178,34 +173,34 @@ resource "aws_s3_bucket" "ceng-media" {
     enabled = true
 
     transition {
-      days          = 0
+      days          = 1
       storage_class = "GLACIER"
     }
   }
+}
 
-  resource "aws_s3_bucket_object" "movies" {
-    bucket = "ceng-media"
-    key    = "movies/"
-    source = "objects/movies"
-  }
+resource "aws_s3_bucket_object" "movies" {
+  bucket = "${aws_s3_bucket.ceng-media.bucket}"
+  key    = "movies/"
+  source = "objects/movies"
+}
 
-  resource "aws_s3_bucket_object" "tv-shows" {
-    bucket = "ceng-media"
-    key    = "tv-shows/"
-    source = "objects/tv-shows"
-  }
+resource "aws_s3_bucket_object" "tv-shows" {
+  bucket = "${aws_s3_bucket.ceng-media.bucket}"
+  key    = "tv-shows/"
+  source = "objects/tv-shows"
+}
 
-  resource "aws_s3_bucket_object" "clips" {
-    bucket = "ceng-media"
-    key    = "clips/"
-    source = "objects/clips"
-  }
+resource "aws_s3_bucket_object" "clips" {
+  bucket = "${aws_s3_bucket.ceng-media.bucket}"
+  key    = "clips/"
+  source = "objects/clips"
+}
 
-  resource "aws_s3_bucket_object" "tech" {
-    bucket = "ceng-media"
-    key    = "tech/"
-    source = "objects/tech"
-  }
+resource "aws_s3_bucket_object" "tech" {
+  bucket = "${aws_s3_bucket.ceng-media.bucket}"
+  key    = "tech/"
+  source = "objects/tech"
 }
 
 #-----------------------------------------#
@@ -213,7 +208,7 @@ resource "aws_s3_bucket" "ceng-media" {
 # Usage: Backup                           #
 # Class: Glacier                          #
 # Versioned: false                        #
-# Lifecycle: 0 Days -> Glacier            #
+# Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
 resource "aws_s3_bucket" "ceng-music" {
   bucket = "ceng-music"
@@ -229,16 +224,16 @@ resource "aws_s3_bucket" "ceng-music" {
     enabled = true
 
     transition {
-      days          = 0
+      days          = 1
       storage_class = "GLACIER"
     }
   }
+}
 
-  resource "aws_s3_bucket_object" "artists" {
-    bucket = "ceng-music"
-    key    = "artists/"
-    source = "objects/artists"
-  }
+resource "aws_s3_bucket_object" "artists" {
+  bucket = "${aws_s3_bucket.ceng-music.bucket}"
+  key    = "artists/"
+  source = "objects/artists"
 }
 
 #-----------------------------------------#
@@ -246,7 +241,7 @@ resource "aws_s3_bucket" "ceng-music" {
 # Usage: Backup                           #
 # Class: Glacier                          #
 # Versioned: false                        #
-# Lifecycle: 0 Days -> Glacier            #
+# Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
 resource "aws_s3_bucket" "ceng-pictures" {
   bucket = "ceng-pictures"
@@ -262,7 +257,7 @@ resource "aws_s3_bucket" "ceng-pictures" {
     enabled = true
 
     transition {
-      days          = 0
+      days          = 1
       storage_class = "GLACIER"
     }
   }
@@ -273,7 +268,7 @@ resource "aws_s3_bucket" "ceng-pictures" {
 # Usage: Backup                           #
 # Class: Glacier                          #
 # Versioned: False                        #
-# Lifecycle: 0 Days -> Glacier            #
+# Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
 resource "aws_s3_bucket" "ceng-projects" {
   bucket = "ceng-projects"
@@ -289,7 +284,7 @@ resource "aws_s3_bucket" "ceng-projects" {
     enabled = true
 
     transition {
-      days          = 0
+      days          = 1
       storage_class = "GLACIER"
     }
   }
