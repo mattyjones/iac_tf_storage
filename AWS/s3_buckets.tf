@@ -27,18 +27,18 @@ resource "aws_s3_bucket" "ceng-adult" {
       storage_class = "GLACIER"
     }
   }
-}
 
-resource "aws_s3_bucket_object" "videos" {
-  bucket = "ceng-adult"
-  key    = "videos/"
-  source = "objects/videos"
-}
+  resource "aws_s3_bucket_object" "videos" {
+    bucket = "ceng-adult"
+    key    = "videos/"
+    source = "objects/videos"
+  }
 
-resource "aws_s3_bucket_object" "pictures" {
-  bucket = "ceng-adult"
-  key    = "pictures/"
-  source = "objects/pictures"
+  resource "aws_s3_bucket_object" "pictures" {
+    bucket = "ceng-adult"
+    key    = "pictures/"
+    source = "objects/pictures"
+  }
 }
 
 #-----------------------------------------#
@@ -66,34 +66,34 @@ resource "aws_s3_bucket" "ceng-applications" {
       storage_class = "GLACIER"
     }
   }
-}
 
-## Linux ##
-resource "aws_s3_bucket_object" "linux" {
-  bucket = "ceng-applications"
-  key    = "linux/"
-  source = "objects/linux"
-}
+  ## Linux ##
+  resource "aws_s3_bucket_object" "linux" {
+    bucket = "ceng-applications"
+    key    = "linux/"
+    source = "objects/linux"
+  }
 
-## OSX ##
-resource "aws_s3_bucket_object" "osx" {
-  bucket = "ceng-applications"
-  key    = "osx/"
-  source = "objects/osx"
-}
+  ## OSX ##
+  resource "aws_s3_bucket_object" "osx" {
+    bucket = "ceng-applications"
+    key    = "osx/"
+    source = "objects/osx"
+  }
 
-## Other ##
-resource "aws_s3_bucket_object" "other" {
-  bucket = "ceng-applications"
-  key    = "other/"
-  source = "objects/other"
-}
+  ## Other ##
+  resource "aws_s3_bucket_object" "other" {
+    bucket = "ceng-applications"
+    key    = "other/"
+    source = "objects/other"
+  }
 
-## Win7 ##
-resource "aws_s3_bucket_object" "win7" {
-  bucket = "ceng-applications"
-  key    = "win7/"
-  source = "objects/win7"
+  ## Win7 ##
+  resource "aws_s3_bucket_object" "win7" {
+    bucket = "ceng-applications"
+    key    = "win7/"
+    source = "objects/win7"
+  }
 }
 
 #-----------------------------------------#
@@ -233,12 +233,12 @@ resource "aws_s3_bucket" "ceng-music" {
       storage_class = "GLACIER"
     }
   }
-}
 
-resource "aws_s3_bucket_object" "artists" {
-  bucket = "ceng-music"
-  key    = "artists/"
-  source = "objects/artists"
+  resource "aws_s3_bucket_object" "artists" {
+    bucket = "ceng-music"
+    key    = "artists/"
+    source = "objects/artists"
+  }
 }
 
 #-----------------------------------------#
@@ -264,10 +264,6 @@ resource "aws_s3_bucket" "ceng-pictures" {
     transition {
       days          = 0
       storage_class = "GLACIER"
-    }
-
-    expiration {
-      days = 7
     }
   }
 }
