@@ -9,8 +9,8 @@
 # Versioned: false                        #
 # Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
-resource "aws_s3_bucket" "ceng-adult" {
-  bucket = "ceng-adult"
+resource "aws_s3_bucket" "adult_ceng" {
+  bucket = "adult_ceng"
   acl    = "private"
 
   versioning {
@@ -30,13 +30,13 @@ resource "aws_s3_bucket" "ceng-adult" {
 }
 
 resource "aws_s3_bucket_object" "videos" {
-  bucket = "${aws_s3_bucket.ceng-adult.bucket}"
+  bucket = "${aws_s3_bucket.adult_ceng.bucket}"
   key    = "videos/"
   source = "objects/videos"
 }
 
 resource "aws_s3_bucket_object" "pictures" {
-  bucket = "${aws_s3_bucket.ceng-adult.bucket}"
+  bucket = "${aws_s3_bucket.adult_ceng.bucket}"
   key    = "pictures/"
   source = "objects/pictures"
 }
@@ -48,8 +48,8 @@ resource "aws_s3_bucket_object" "pictures" {
 # Versioned: false                        #
 # Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
-resource "aws_s3_bucket" "ceng-applications" {
-  bucket = "ceng-applications"
+resource "aws_s3_bucket" "applications_ceng" {
+  bucket = "applications_ceng"
   acl    = "private"
 
   versioning {
@@ -70,28 +70,28 @@ resource "aws_s3_bucket" "ceng-applications" {
 
 ## Linux ##
 resource "aws_s3_bucket_object" "linux" {
-  bucket = "${aws_s3_bucket.ceng-applications.bucket}"
+  bucket = "${aws_s3_bucket.applications_ceng.bucket}"
   key    = "linux/"
   source = "objects/linux"
 }
 
 ## OSX ##
 resource "aws_s3_bucket_object" "osx" {
-  bucket = "${aws_s3_bucket.ceng-applications.bucket}"
+  bucket = "${aws_s3_bucket.applications_ceng.bucket}"
   key    = "osx/"
   source = "objects/osx"
 }
 
 ## Other ##
 resource "aws_s3_bucket_object" "other" {
-  bucket = "${aws_s3_bucket.ceng-applications.bucket}"
+  bucket = "${aws_s3_bucket.applications_ceng.bucket}"
   key    = "other/"
   source = "objects/other"
 }
 
 ## Win7 ##
 resource "aws_s3_bucket_object" "win7" {
-  bucket = "${aws_s3_bucket.ceng-applications.bucket}"
+  bucket = "${aws_s3_bucket.applications_ceng.bucket}"
   key    = "win7/"
   source = "objects/win7"
 }
@@ -103,8 +103,8 @@ resource "aws_s3_bucket_object" "win7" {
 # Versioned: false                        #
 # Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
-resource "aws_s3_bucket" "ceng-books" {
-  bucket = "ceng-books"
+resource "aws_s3_bucket" "books_ceng" {
+  bucket = "books_ceng"
   acl    = "private"
 
   versioning {
@@ -132,23 +132,12 @@ resource "aws_s3_bucket" "ceng-books" {
 # Lifecycle: 1 Day -> Infrequent Access   #
 # Lifecycle: 30 Days -> Glacier           #
 #-----------------------------------------#
-resource "aws_s3_bucket" "ceng-documents" {
-  bucket = "ceng-documents"
+resource "aws_s3_bucket" "documents_ceng" {
+  bucket = "documents_ceng"
   acl    = "private"
 
   versioning {
     enabled = false
-  }
-
-  lifecycle_rule {
-    id      = "docs"
-    prefix  = ""
-    enabled = true
-
-    transition {
-      days          = 30
-      storage_class = "GLACIER"
-    }
   }
 }
 
@@ -159,8 +148,8 @@ resource "aws_s3_bucket" "ceng-documents" {
 # Versioned: false                        #
 # Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
-resource "aws_s3_bucket" "ceng-media" {
-  bucket = "ceng-media"
+resource "aws_s3_bucket" "media_ceng" {
+  bucket = "media_ceng"
   acl    = "private"
 
   versioning {
@@ -180,25 +169,25 @@ resource "aws_s3_bucket" "ceng-media" {
 }
 
 resource "aws_s3_bucket_object" "movies" {
-  bucket = "${aws_s3_bucket.ceng-media.bucket}"
+  bucket = "${aws_s3_bucket.media_ceng.bucket}"
   key    = "movies/"
   source = "objects/movies"
 }
 
 resource "aws_s3_bucket_object" "tv-shows" {
-  bucket = "${aws_s3_bucket.ceng-media.bucket}"
+  bucket = "${aws_s3_bucket.media_ceng.bucket}"
   key    = "tv-shows/"
   source = "objects/tv-shows"
 }
 
 resource "aws_s3_bucket_object" "clips" {
-  bucket = "${aws_s3_bucket.ceng-media.bucket}"
+  bucket = "${aws_s3_bucket.media_ceng.bucket}"
   key    = "clips/"
   source = "objects/clips"
 }
 
 resource "aws_s3_bucket_object" "tech" {
-  bucket = "${aws_s3_bucket.ceng-media.bucket}"
+  bucket = "${aws_s3_bucket.media_ceng.bucket}"
   key    = "tech/"
   source = "objects/tech"
 }
@@ -210,8 +199,8 @@ resource "aws_s3_bucket_object" "tech" {
 # Versioned: false                        #
 # Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
-resource "aws_s3_bucket" "ceng-music" {
-  bucket = "ceng-music"
+resource "aws_s3_bucket" "music_ceng" {
+  bucket = "music_ceng"
   acl    = "private"
 
   versioning {
@@ -231,7 +220,7 @@ resource "aws_s3_bucket" "ceng-music" {
 }
 
 resource "aws_s3_bucket_object" "artists" {
-  bucket = "${aws_s3_bucket.ceng-music.bucket}"
+  bucket = "${aws_s3_bucket.music_ceng.bucket}"
   key    = "artists/"
   source = "objects/artists"
 }
@@ -243,8 +232,8 @@ resource "aws_s3_bucket_object" "artists" {
 # Versioned: false                        #
 # Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
-resource "aws_s3_bucket" "ceng-pictures" {
-  bucket = "ceng-pictures"
+resource "aws_s3_bucket" "pictures_ceng" {
+  bucket = "pictures_ceng"
   acl    = "private"
 
   versioning {
@@ -270,8 +259,8 @@ resource "aws_s3_bucket" "ceng-pictures" {
 # Versioned: False                        #
 # Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
-resource "aws_s3_bucket" "ceng-projects" {
-  bucket = "ceng-projects"
+resource "aws_s3_bucket" "projects_ceng" {
+  bucket = "projects_ceng"
   acl    = "private"
 
   versioning {
