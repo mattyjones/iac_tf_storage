@@ -10,7 +10,9 @@
 # Lifecycle: 1 Day -> Glacier             #
 #-----------------------------------------#
 resource "aws_s3_bucket" "adult_ceng" {
-  bucket = "adult_ceng"
+  # resource name
+
+  bucket = "adult_ceng" # bucket name
   acl    = "private"
 
   versioning {
@@ -19,19 +21,24 @@ resource "aws_s3_bucket" "adult_ceng" {
 
   lifecycle_rule {
     id      = "adult-glacier"
-    prefix  = ""
+    prefix  = ""              # setting this to an empty string means the entire bucket will adhere to the rule
     enabled = true
 
     transition {
-      days          = 1
+      days          = 1         # transistions occur at midnight in the timezone of the bucket.
       storage_class = "GLACIER"
     }
   }
 }
 
 resource "aws_s3_bucket_object" "videos" {
+  # Do not hardcode the bucket name here. Besides being ugly, you will run the risk of the folder resources being created before the bucket and causing a failed run. By using the terrafrom DSL you are creating a dependency between the object resource and the bucket resource.
   bucket = "${aws_s3_bucket.adult_ceng.bucket}"
-  key    = "videos/"
+
+  # This is creating a folder strucutre using 0 byte files. The trailing slash is necessary, if it is omitted then you will end up with an empty file instead of a directory.
+  key = "videos/"
+
+  # This is the path to 0 byte file that will be uploaded, the simplest way to create it is to use `touch`.
   source = "objects/videos"
 }
 
