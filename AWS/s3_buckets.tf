@@ -124,6 +124,45 @@ resource "aws_s3_bucket" "books_ceng" {
 }
 
 #-----------------------------------------#
+# Comics                                  #
+# Usage: Backup                           #
+# Class: Glacier                          #
+# Versioned: false                        #
+# Lifecycle: 1 Day -> Glacier             #
+#-----------------------------------------#
+resource "aws_s3_bucket" "comics_ceng" {
+  bucket = "comics_ceng"
+  acl    = "private"
+
+  versioning {
+    enabled = false
+  }
+
+  lifecycle_rule {
+    id      = "comics"
+    prefix  = ""
+    enabled = true
+
+    transition {
+      days          = 1
+      storage_class = "GLACIER"
+    }
+  }
+}
+
+resource "aws_s3_bucket_object" "marvel" {
+  bucket = "${aws_s3_bucket.media_ceng.bucket}"
+  key    = "marvel/"
+  source = "objects/marvel"
+}
+
+resource "aws_s3_bucket_object" "dc" {
+  bucket = "${aws_s3_bucket.media_ceng.bucket}"
+  key    = "dc/"
+  source = "objects/dc"
+}
+
+#-----------------------------------------#
 # Documents                               #
 # Usage: Backup                           #
 # Class: Infrequent Access                #
