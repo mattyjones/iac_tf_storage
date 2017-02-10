@@ -68,11 +68,32 @@ resource "aws_s3_bucket" "applications_ceng" {
   }
 }
 
+## Android ##
+resource "aws_s3_bucket_object" "android" {
+  bucket = "${aws_s3_bucket.applications_ceng.bucket}"
+  key    = "android/"
+  source = "objects/android"
+}
+
 ## Linux ##
 resource "aws_s3_bucket_object" "linux" {
   bucket = "${aws_s3_bucket.applications_ceng.bucket}"
   key    = "linux/"
   source = "objects/linux"
+}
+
+## Nintendo ##
+resource "aws_s3_bucket_object" "nintendo" {
+  bucket = "${aws_s3_bucket.applications_ceng.bucket}"
+  key    = "nintendo/"
+  source = "objects/nintendo"
+}
+
+## Playstation ##
+resource "aws_s3_bucket_object" "playstation" {
+  bucket = "${aws_s3_bucket.applications_ceng.bucket}"
+  key    = "playstation/"
+  source = "objects/playstation"
 }
 
 ## OSX ##
@@ -89,11 +110,11 @@ resource "aws_s3_bucket_object" "other" {
   source = "objects/other"
 }
 
-## Win7 ##
-resource "aws_s3_bucket_object" "win7" {
+## Windows ##
+resource "aws_s3_bucket_object" "windows" {
   bucket = "${aws_s3_bucket.applications_ceng.bucket}"
-  key    = "win7/"
-  source = "objects/win7"
+  key    = "windows/"
+  source = "objects/windows"
 }
 
 #-----------------------------------------#
