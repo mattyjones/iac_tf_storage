@@ -129,6 +129,7 @@ resource "aws_s3_bucket_object" "windows" {
 # Usage: Backup                           #
 # Class: Glacier                          #
 # Versioned: false                        #
+# Lifecycle: Standard                     #
 #-----------------------------------------#
 resource "aws_s3_bucket" "books_ceng" {
   bucket = "books_ceng"
@@ -139,6 +140,15 @@ resource "aws_s3_bucket" "books_ceng" {
   }
 
   /*lifecycle_rule {
+                    id      = "books"
+                    prefix  = ""
+                    enabled = true
+
+                    transition {
+                      days          = 1
+                      storage_class = "GLACIER"
+                    }
+                  }*/
 }
 
 #-----------------------------------------#
@@ -146,7 +156,7 @@ resource "aws_s3_bucket" "books_ceng" {
 # Usage: Backup                           #
 # Class: Glacier                          #
 # Versioned: false                        #
-# Lifecycle: 1 Day -> Glacier             #
+# Lifecycle: Standard                     #
 #-----------------------------------------#
 resource "aws_s3_bucket" "comics_ceng" {
   bucket = "comics_ceng"
@@ -157,15 +167,15 @@ resource "aws_s3_bucket" "comics_ceng" {
   }
 
   /*lifecycle_rule {
-        id      = "comics"
-        prefix  = ""
-        enabled = true
+                    id      = "comics"
+                    prefix  = ""
+                    enabled = true
 
-        transition {
-          days          = 1
-          storage_class = "GLACIER"
-        }
-      }*/
+                    transition {
+                      days          = 1
+                      storage_class = "GLACIER"
+                    }
+                  }*/
 }
 
 resource "aws_s3_bucket_object" "marvel" {
