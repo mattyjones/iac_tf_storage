@@ -179,13 +179,13 @@ resource "aws_s3_bucket" "comics_ceng" {
 }
 
 resource "aws_s3_bucket_object" "marvel" {
-  bucket = "${aws_s3_bucket.media_ceng.bucket}"
+  bucket = "${aws_s3_bucket.comics_ceng.bucket}"
   key    = "marvel/"
   source = "objects/marvel"
 }
 
 resource "aws_s3_bucket_object" "dc" {
-  bucket = "${aws_s3_bucket.media_ceng.bucket}"
+  bucket = "${aws_s3_bucket.comics_ceng.bucket}"
   key    = "dc/"
   source = "objects/dc"
 }
