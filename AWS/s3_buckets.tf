@@ -139,16 +139,16 @@ resource "aws_s3_bucket" "books_ceng" {
     enabled = false
   }
 
-  lifecycle_rule {
-    id      = "books"
-    prefix  = ""
-    enabled = true
+  /*lifecycle_rule {
+        id      = "books"
+        prefix  = ""
+        enabled = true
 
-    transition {
-      days          = 1
-      storage_class = "GLACIER"
-    }
-  }
+        transition {
+          days          = 1
+          storage_class = "GLACIER"
+        }
+      }*/
 }
 
 #-----------------------------------------#
@@ -166,16 +166,16 @@ resource "aws_s3_bucket" "comics_ceng" {
     enabled = false
   }
 
-  lifecycle_rule {
-    id      = "comics"
-    prefix  = ""
-    enabled = true
+  /*lifecycle_rule {
+        id      = "comics"
+        prefix  = ""
+        enabled = true
 
-    transition {
-      days          = 1
-      storage_class = "GLACIER"
-    }
-  }
+        transition {
+          days          = 1
+          storage_class = "GLACIER"
+        }
+      }*/
 }
 
 resource "aws_s3_bucket_object" "marvel" {
@@ -307,16 +307,16 @@ resource "aws_s3_bucket" "pictures_ceng" {
     enabled = false
   }
 
-  lifecycle_rule {
-    id      = "pictures"
-    prefix  = ""
-    enabled = true
+  /*lifecycle_rule {
+      id      = "pictures"
+      prefix  = ""
+      enabled = true
 
-    transition {
-      days          = 1
-      storage_class = "GLACIER"
-    }
-  }
+      transition {
+        days          = 1
+        storage_class = "GLACIER"
+      }
+    }*/
 }
 
 #-----------------------------------------#
