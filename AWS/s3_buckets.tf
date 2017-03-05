@@ -196,8 +196,7 @@ resource "aws_s3_bucket_object" "dc" {
 # Class: Infrequent Access                #
 # Class: Glacier                          #
 # Versioned: false                        #
-# Lifecycle: 1 Day -> Infrequent Access   #
-# Lifecycle: 30 Days -> Glacier           #
+# Lifecycle: Standard                     #
 #-----------------------------------------#
 resource "aws_s3_bucket" "documents_ceng" {
   bucket = "documents_ceng"
