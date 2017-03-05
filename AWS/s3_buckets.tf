@@ -303,7 +303,7 @@ resource "aws_s3_bucket_object" "artists" {
 # Usage: Backup                           #
 # Class: Glacier                          #
 # Versioned: false                        #
-# Lifecycle: 1 Day -> Glacier             #
+# Lifecycle: Standard                     #
 #-----------------------------------------#
 resource "aws_s3_bucket" "pictures_ceng" {
   bucket = "pictures_ceng"
@@ -314,15 +314,15 @@ resource "aws_s3_bucket" "pictures_ceng" {
   }
 
   /*lifecycle_rule {
-      id      = "pictures"
-      prefix  = ""
-      enabled = true
+                  id      = "pictures"
+                  prefix  = ""
+                  enabled = true
 
-      transition {
-        days          = 1
-        storage_class = "GLACIER"
-      }
-    }*/
+                  transition {
+                    days          = 1
+                    storage_class = "GLACIER"
+                  }
+                }*/
 }
 
 #-----------------------------------------#
