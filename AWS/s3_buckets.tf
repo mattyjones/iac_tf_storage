@@ -235,28 +235,34 @@ resource "aws_s3_bucket" "media_ceng" {
   }
 }
 
-resource "aws_s3_bucket_object" "movies" {
-  bucket = "${aws_s3_bucket.media_ceng.bucket}"
-  key    = "movies/"
-  source = "objects/movies"
-}
-
-resource "aws_s3_bucket_object" "tv-shows" {
-  bucket = "${aws_s3_bucket.media_ceng.bucket}"
-  key    = "tv-shows/"
-  source = "objects/tv-shows"
-}
-
 resource "aws_s3_bucket_object" "clips" {
   bucket = "${aws_s3_bucket.media_ceng.bucket}"
   key    = "clips/"
   source = "objects/clips"
 }
 
+resource "aws_s3_bucket_object" "personal" {
+  bucket = "${aws_s3_bucket.media_ceng.bucket}"
+  key    = "personal/"
+  source = "objects/personal"
+}
+
+resource "aws_s3_bucket_object" "movies" {
+  bucket = "${aws_s3_bucket.media_ceng.bucket}"
+  key    = "movies/"
+  source = "objects/movies"
+}
+
 resource "aws_s3_bucket_object" "tech" {
   bucket = "${aws_s3_bucket.media_ceng.bucket}"
   key    = "tech/"
   source = "objects/tech"
+}
+
+resource "aws_s3_bucket_object" "tv-shows" {
+  bucket = "${aws_s3_bucket.media_ceng.bucket}"
+  key    = "tv-shows/"
+  source = "objects/tv-shows"
 }
 
 #-----------------------------------------#
