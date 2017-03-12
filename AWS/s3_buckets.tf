@@ -350,3 +350,19 @@ resource "aws_s3_bucket" "projects_ceng" {
     }
   }
 }
+
+#-----------------------------------------#
+# Secure                                  #
+# Usage: Backup                           #
+# Class: Standard                         #
+# Versioned: False                        #
+# Lifecycle:                              #
+#-----------------------------------------#
+resource "aws_s3_bucket" "projects_secure" {
+  bucket = "projects_secure"
+  acl    = "private"
+
+  versioning {
+    enabled = false
+  }
+}
